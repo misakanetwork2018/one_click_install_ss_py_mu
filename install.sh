@@ -72,6 +72,7 @@ function instdpec()
 		if  [ ! -n "$TEST" ] ;then
 		$PM -y install git
 		fi
+		easy_install pip
 		$PM -y groupinstall "Development Tools"
 		$PM -y update nss curl
 	elif [ "$1" == "Debian" ] || [ "$1" == "Raspbian" ] || [ "$1" == "Ubuntu" ];then
@@ -82,6 +83,7 @@ function instdpec()
 		$PM -y install git
 		fi
 		$PM -y install build-essential
+		$PM -y install python-pip
 	else
 		echo "The shell can be just supported to install ssr on Centos, Ubuntu and Debian."
 		exit 1
