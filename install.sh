@@ -136,6 +136,9 @@ if [ $? -ne 0 ]; then
 	echo "Install cymysql by pip FAIL. Please try again."
 	exit 1;
 	fi
+	cd /root
+	rm -rf cymysql-0.9.13
+	rm -rf cymysql-0.9.13.tar.gz
 fi
 
 if $supervisor; then
