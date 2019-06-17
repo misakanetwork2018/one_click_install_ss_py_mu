@@ -1,6 +1,6 @@
 #!/bin/sh
 
-GETOPT_ARGS=`getopt -o sp:h:u:P:n:d:raS: -l supervisor,password:,host:,username:,port:,node:,db:,run,autorestart,setport: -- "$@"`
+GETOPT_ARGS=`getopt -o sp:h:u:P:n:d:ra: -l supervisor,password:,host:,username:,port:,node:,db:,run,autorestart -- "$@"`
 eval set -- "$GETOPT_ARGS"
 OLD_IFS="$IFS"
 IFS=" "
@@ -15,14 +15,12 @@ node=""
 db=""
 autorestart=false
 run=false
-ss_port=13590
 
 #获取参数
 while [ -n "$1" ]
 do
 	case "$1" in
 		-s|--supervisor) supervisor=true;shift 1;;
-		-S|--setport) ss_port=$2;shift 2;;
 		-r|--run) run=true;shift 1;;
 		-a|--autorestart) autorestart=true;shift 1;;
                 -P|--port) port=$2;shift 2;;
@@ -228,7 +226,5 @@ echo "0 4 * * * supervisorctl reload" >> /var/spool/cron/root
 		sed -i 's/exit 0/supervisord\nexit 0/' /etc/rc.local
 	fi
 fi
-
-echo "Your port $ss_port password is $random_p"
 
 echo "Install completely."
